@@ -163,7 +163,7 @@ function quizTimer(){
 }
 
 function startQuiz(){
-    //! loads all page elements for the quiz screen...
+    //! loads all page elements for the quiz screen, then automatically throws to pageQuizContent...
     var questionPage = $('#contentarea');
         questionPage.empty();
 
@@ -190,12 +190,15 @@ function startQuiz(){
     var choiceA = $('<input>');
         choiceA.attr('type','button');
         choiceA.attr('id','choiceA');
+    
     var choiceB = $('<input>');
         choiceB.attr('type','button');
         choiceB.attr('id','choiceB');
+    
     var choiceC = $('<input>');
         choiceC.attr('type','button');
         choiceC.attr('id','choiceC');
+    
     var choiceD = $('<input>');
         choiceD.attr('type','button');
         choiceD.attr('id','choiceD');
@@ -362,7 +365,7 @@ function winScreen(){
             highScoreTrack = scoreBoard.concat(newScore);
             localStorage.setItem('highScoreTrack', JSON.stringify(highScoreTrack));
         }
-        window.localStorage.setItem('highScoreTrack',JSON.stringify(highScoreTrack));
+        window.localStorage.setItem( 'highScoreTrack', JSON.stringify(highScoreTrack));
         var highScoresPage = $('#contentarea');
         highScoresPage.empty();
         submitHighScore();
@@ -372,15 +375,14 @@ function winScreen(){
 function submitHighScore(){
     var highScores = $('#contentarea');
     var scoresHeaderTag = $('<h1>');
-    scoresHeaderTag.text("High Scores:");
-    highScores.append(scoresHeaderTag);
+        scoresHeaderTag.text("High Scores:");
+        highScores.append(scoresHeaderTag);
 
     highScoreTrack = JSON.parse(window.localStorage.getItem('highScoreTrack'));
 
     for (var i=0; i<highScoreTrack.length;i++){
         var tagScore = $('<h2>');
-        tagScore.attr('class','topscores');
-        var temp = localStorage.getItem
+            tagScore.attr('class','topscores');
         tagScore.text((i+1)+". "+highScoreTrack[i].initials+": "+highScoreTrack[i].hScore);
         highScores.append(tagScore);
     }
