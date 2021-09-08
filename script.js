@@ -393,8 +393,11 @@ function submitHighScore(){
 }
 
 function retakeQuiz(){
-    var landingPage = document.getElementById("contentarea");
-    landingPage.innerHTML = "";
+    //! reloads and resets the various global variables used to control the logic
+    //! of the quiz, then loops back to the landingScreen function...
+    var landingPage = $('#contentarea');
+    landingPage.empty();
+
     questionSelect = [
         {
            question: "2+2=?",
