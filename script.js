@@ -141,22 +141,20 @@ landingScreen();
 
 function quizTimer(){
     var timeLeft = 10;
-    var scoreCard = document.getElementById('scorecard')
-    var timerDisplayTag = document.createElement('h1');
-    var timerDisplayText = document.createTextNode('');
-    timerDisplayTag.appendChild(timerDisplayText);
-    scoreCard.appendChild(timerDisplayTag);
+    var scoreCard = $('#scorecard');
+    var timerDisplayTag = $('<h1>');
+    scoreCard.append(timerDisplayTag);
 
     var timeInterval = setInterval(function(){
         if (timeLeft>1){
-            timerDisplayText.textContent = timeLeft + " seconds remain!";
+            timerDisplayTag.text(timeLeft + " seconds remain!");
             timeLeft--;
         }
         else if(timeLeft ===1){
-            timerDisplayText.textContent = timeLeft + " second remains!";
+            timerDisplayTag.text(timeLeft + " second remains!");
             timeLeft--;
         }else{
-            timerDisplayText.textContent = "";
+            timerDisplayTag.text("");
             clearInterval(timeInterval);
             winScreen();
         }
