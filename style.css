@@ -1,0 +1,67 @@
+*,*::before,*::after{
+        box-sizing: border-box;
+}
+
+*{
+        width: 90%;
+}
+
+#header{
+        position: relative;
+        display: flex;
+        margin: auto;
+        text-align: center;
+        
+}
+
+#contentarea{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        text-align: center;
+        margin: auto;
+        padding-top: 8rem;
+}
+
+#answersList{
+        display: grid;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 95%;
+        margin: auto;
+        gap: 10px;
+}
+
+#buttonDisplay{
+        display: grid;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: auto;
+        gap: 10px;
+}
+
+#scorecard{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        text-align: center;
+        margin: auto;
+}
+
+#choiceA:hover, #choiceB:hover, #choiceC:hover, #choiceD:hover{
+        background-color: #710C04;
+        color: white;
+}
+
+#initialFormContainer{
+        display: flex;
+        width: 80%;
+}
+
+.topscores{
+        margin: auto;
+        padding-bottom: 1%;
+        color: #710C04;
+}
