@@ -1,9 +1,12 @@
+//! some globals for game control...
 var correctAnswer;
 var timer = "10";
 var deleteArray=[];
 var questionsAnswered=0;
 var score = 0;
 var scoreIndex = 1;
+
+var landingPage = $('#contentarea');
 
 var questionSelect = [
     {
@@ -109,28 +112,29 @@ var questionSelect = [
 ]
 
 function landingScreen(){
-    var landingPage = document.getElementById("contentarea");
-    var landingh1Tag = document.createElement("h1");
-    var landingh1text = document.createTextNode("Challenge:");
-    landingh1Tag.appendChild(landingh1text);  
-    landingPage.appendChild(landingh1Tag);
 
-    var landingh2Tag = document.createElement("h2");
-    var landingh2text = document.createTextNode("Math Quiz");
-    landingh2Tag.appendChild(landingh2text);  
-    landingPage.appendChild(landingh2Tag);
+    var landingh1Tag = $('<h1>');
+    landingh1Tag.text('Challenge:');
+    landingPage.append(landingh1Tag);
+
+    var landingh2Tag = $('<h2>');
+    landingh2Tag.text('Math Quiz');
+    landingPage.append(landingh2Tag);
 
     var landingInstructions = document.createElement("p");
-    var landingInstrText = document.createTextNode("How many of the following questions can you answer? Correctly, I mean? Did you even pay attention in school anyway? Maybe you're a big ol' dummy; let's find out.");
-    landingInstructions.appendChild(landingInstrText);
-    landingPage.appendChild(landingInstructions);
+    var landingInstructions = $('<p>');
+    landingInstructions.text("How many of the following questions can you answer? Correctly, I mean? Did you even pay attention in school anyway? Maybe you're a big ol' dummy; let's find out.");
+    landingPage.append(landingInstructions);
 
-    var button = document.createElement('input');
-    button.setAttribute("type", "button");
-    button.setAttribute("value","Start Quiz");
-    landingPage.appendChild(button);
-    button.addEventListener("click",startQuiz);
-    button.addEventListener("click",quizTimer);
+    var button = $('<input>');
+    button.attr("type", "button");
+    button.attr("value","Start Quiz");
+    landingPage.append(button);
+
+    button.on("click", function(){
+        startQuiz();
+        quizTimer();
+    })
 }
 
 landingScreen();
