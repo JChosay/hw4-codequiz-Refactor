@@ -163,9 +163,7 @@ function quizTimer(){
 
 function startQuiz(){
     //! loads all page elements for the quiz screen...
-    if (questionsAnswered===9){
-        lastQuest();
-    }
+    console.log("Answered: "+questionsAnswered);
 
     var questionPage = $('#contentarea');
         questionPage.empty();
@@ -219,19 +217,31 @@ function pageQuizContent(){
     var ansC = $("#choiceC");
     var ansD = $("#choiceD");
     
-    //!generates a random number to select a question     
-    for(i=0; i<questionSelect.length-1; i++){
-        var index=Math.floor(Math.random() * questionSelect.length);
-    }
-    
-    correctAnswer=questionSelect[index].correctAnsInd;
 
-    //! sets question and answer-button values
-    question.text(questionSelect[index].question);
-    ansA.attr('value',questionSelect[index].answers[0]);
-    ansB.attr('value',questionSelect[index].answers[1]);
-    ansC.attr('value',questionSelect[index].answers[2]);
-    ansD.attr('value',questionSelect[index].answers[3]);
+    if (questionsAnswered !== 9) {
+        //!generates a random number to select a question     
+        for(i=0; i<questionSelect.length-1; i++){
+            var index=Math.floor(Math.random() * questionSelect.length);
+        }
+        
+        correctAnswer=questionSelect[index].correctAnsInd;
+
+        //! sets question and answer-button values
+        question.text(questionSelect[index].question);
+        ansA.attr('value',questionSelect[index].answers[0]);
+        ansB.attr('value',questionSelect[index].answers[1]);
+        ansC.attr('value',questionSelect[index].answers[2]);
+        ansD.attr('value',questionSelect[index].answers[3]);
+    }else{
+        correctAnswer=questionSelect[0].correctAnsInd;
+
+        //! sets question and answer-button values
+        question.text(questionSelect[0].question);
+        ansA.attr('value',questionSelect[0].answers[0]);
+        ansB.attr('value',questionSelect[0].answers[1]);
+        ansC.attr('value',questionSelect[0].answers[2]);
+        ansD.attr('value',questionSelect[0].answers[3]);
+    }
 
     ansA.on("click",function(){
         if (this.value === correctAnswer){
@@ -279,110 +289,14 @@ function rightAnswer(){
     correctAnswer = ""
     questionsAnswered++;
     score++;
-    if (questionsAnswered===9){
-        lastQuest();
+    if (questionsAnswered===10){
+        winScreen();
         }else{
         startQuiz();
         }
-    }
-
-
-function lastQuest(){
-    var scoresDisplay = document.getElementById("highscores").style.display = "none";
-    var questionPage = document.getElementById("contentarea");
-    questionPage.innerHTML = "";
-    var questHeadTag = document.createElement("h3");
-    var questHeadText = document.createTextNode("Question:");
-    questHeadTag.appendChild(questHeadText);
-    questionPage.appendChild(questHeadTag);
-    
-    var questDiv = document.createElement("div");
-    questDiv.setAttribute("id","questionText");
-    questionPage.appendChild(questDiv);
-    var questTag = document.createElement("h3");
-    questionPage.appendChild(questTag);
-    var questionText = document.createTextNode("");
-    questionPage.appendChild(questionText);
-    
-    var ansDiv = document.createElement("div");
-    ansDiv.setAttribute("id","answersList")
-    questionPage.appendChild(ansDiv);
-
-    var choiceA = document.createElement('input');
-    var choiceB = document.createElement('input');
-    var choiceC = document.createElement('input');
-    var choiceD = document.createElement('input');
-    choiceA.setAttribute("type","button");
-    choiceA.setAttribute("id","choiceA");
-    choiceB.setAttribute("type","button");
-    choiceB.setAttribute("id","choiceB");
-    choiceC.setAttribute("type","button");
-    choiceC.setAttribute("id","choiceC");
-    choiceD.setAttribute("type","button");
-    choiceD.setAttribute("id","choiceD");
-    answersList.appendChild(choiceA);
-    answersList.appendChild(choiceB);
-    answersList.appendChild(choiceC);
-    answersList.appendChild(choiceD);
-
-    var question = document.getElementById("questionText");
-    var ansA = document.getElementById("choiceA");
-    var ansB = document.getElementById("choiceB");
-    var ansC = document.getElementById("choiceC");
-    var ansD = document.getElementById("choiceD");
-    
-    var index = 0;
-    
-    correctAnswer=questionSelect[index].correctAnsInd;
-
-    //sets question and answer-button values
-    question.textContent = questionSelect[index].question;
-    ansA.setAttribute("value",questionSelect[index].answers[0]);
-    ansB.setAttribute("value",questionSelect[index].answers[1]);
-    ansC.setAttribute("value",questionSelect[index].answers[2]);
-    ansD.setAttribute("value",questionSelect[index].answers[3]);
-    
-
-    ansA.addEventListener('click',function(){
-        if (this.value === correctAnswer){
-            score ++;
-            winScreen();
-        }else{
-            wrongAnswer();
-        }
-        
-    })
-    ansB.addEventListener('click',function(){
-        if (this.value === correctAnswer){
-            score ++;
-            winScreen();
-        }else{
-            wrongAnswer();
-        }
-        
-    })
-    ansC.addEventListener('click',function(){
-        if (this.value === correctAnswer){
-            score ++;
-            winScreen();
-        }else{
-            wrongAnswer();
-        }
-       
-    })
-    ansD.addEventListener('click',function(){
-        if (this.value === correctAnswer){
-            score ++;
-            winScreen();
-        }else{
-            wrongAnswer();
-        }
-    })
-
 }
 
 function winScreen(){
-    var scoresDisplay = document.getElementById("highscores").style.removeProperty("display");
     var landingPage = document.getElementById("contentarea");
     landingPage.innerHTML = "";
     var landingh1Tag = document.createElement("h1");
