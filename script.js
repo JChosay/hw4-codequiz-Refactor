@@ -6,8 +6,6 @@ var questionsAnswered=0;
 var score = 0;
 var scoreIndex = 1;
 
-var landingPage = $('#contentarea');
-
 var questionSelect = [
     {
        question: "2+2=?",
@@ -112,6 +110,8 @@ var questionSelect = [
 ]
 
 function landingScreen(){
+    //! loads the elements for the landing screen...
+    var landingPage = $('#contentarea');
 
     var landingh1Tag = $('<h1>');
     landingh1Tag.text('Challenge:');
@@ -168,46 +168,47 @@ function startQuiz(){
         lastQuest();
     }
 
-    var scoresDisplay = document.getElementById("highscores").style.display = "none";
-    var questionPage = document.getElementById("contentarea");
-    questionPage.innerHTML = "";
-    var questHeadTag = document.createElement("h3");
-    var questHeadText = document.createTextNode("Question:");
-    questHeadTag.appendChild(questHeadText);
-    questionPage.appendChild(questHeadTag);
-    
-    var questDiv = document.createElement("div");
-    questDiv.setAttribute("id","questionText");
-    questionPage.appendChild(questDiv);
-    var questTag = document.createElement("h3");
-    questionPage.appendChild(questTag);
-    var questionText = document.createTextNode("");
-    questionPage.appendChild(questionText);
-    
-    var ansDiv = document.createElement("div");
-    ansDiv.setAttribute("id","answersList")
-    questionPage.appendChild(ansDiv);
+    var questionPage = $('#contentarea');
+        questionPage.empty();
 
-    var buttonDiv = document.createElement('div');
-    buttonDiv.setAttribute('id','buttonDisplay');
-    answersList.appendChild(buttonDiv);
+    var questHeadTag = $('<h3>');
+        questHeadTag.text("Question:");
+        questionPage.append(questHeadTag);
+    
+    var questDiv = $('<div>');
+        questDiv.attr('id','questionText');
+        questionPage.append(questDiv);
+    
+    var questTag = $('<h3>');
+        questTag.text('');
+        questionPage.append(questTag);
+    
+    var ansDiv = $('<div>');
+        ansDiv.attr('id','answersList')
+        questionPage.append(ansDiv);
 
-    var choiceA = document.createElement('input');
-    var choiceB = document.createElement('input');
-    var choiceC = document.createElement('input');
-    var choiceD = document.createElement('input');
-    choiceA.setAttribute("type","button");
-    choiceA.setAttribute("id","choiceA");
-    choiceB.setAttribute("type","button");
-    choiceB.setAttribute("id","choiceB");
-    choiceC.setAttribute("type","button");
-    choiceC.setAttribute("id","choiceC");
-    choiceD.setAttribute("type","button");
-    choiceD.setAttribute("id","choiceD");
-    buttonDisplay.appendChild(choiceA);
-    buttonDisplay.appendChild(choiceB);
-    buttonDisplay.appendChild(choiceC);
-    buttonDisplay.appendChild(choiceD);
+    var buttonDiv = $('<div>');
+        buttonDiv.attr('id','buttonDisplay');
+        ansDiv.append(buttonDiv);
+
+    var choiceA = $('<input>');
+        choiceA.attr('type','button');
+        choiceA.attr('id','choiceA');
+    var choiceB = $('<input>');
+        choiceB.attr('type','button');
+        choiceB.attr('id','choiceB');
+    var choiceC = $('<input>');
+        choiceC.attr('type','button');
+        choiceC.attr('id','choiceC');
+    var choiceD = $('<input>');
+        choiceD.attr('type','button');
+        choiceD.attr('id','choiceD');
+    
+    buttonDiv.append(choiceA);
+    buttonDiv.append(choiceB);
+    buttonDiv.append(choiceC);
+    buttonDiv.append(choiceD);
+    
     pageQuizContent();
 }
 
