@@ -137,6 +137,7 @@ function landingScreen(){
     })
 }
 
+console.log("OHIO STATE MUST BE DESTROYED.");
 landingScreen();
 
 function quizTimer(){
@@ -339,7 +340,6 @@ function winScreen(){
     
     submitScore.on("click", function(){
         event.preventDefault();
-        console.log(typeText[0].value);
         var highScoreTrack = localStorage.getItem("highScoreTrack");
 
         if(highScoreTrack===null){
@@ -362,39 +362,34 @@ function winScreen(){
             highScoreTrack = scoreBoard.concat(newScore);
             localStorage.setItem('highScoreTrack', JSON.stringify(highScoreTrack));
         }
-        
         window.localStorage.setItem('highScoreTrack',JSON.stringify(highScoreTrack));
-        // var highScoresPage = document.getElementById ("contentarea");
         var highScoresPage = $('#contentarea');
-        // highScoresPage.innerHTML = "";
         highScoresPage.empty();
         submitHighScore();
     })
 }
 
 function submitHighScore(){
-    var highScores = document.getElementById("contentarea");
-    var scoresHeaderTag = document.createElement("h1");
-    var scoresHeaderText = document.createTextNode("High Scores:");
-    scoresHeaderTag.appendChild(scoresHeaderText);  
-    highScores.appendChild(scoresHeaderTag);
+    var highScores = $('#contentarea');
+    var scoresHeaderTag = $('<h1>');
+    scoresHeaderTag.text("High Scores:");
+    highScores.append(scoresHeaderTag);
 
     highScoreTrack = JSON.parse(window.localStorage.getItem('highScoreTrack'));
 
     for (var i=0; i<highScoreTrack.length;i++){
-        var tagScore = document.createElement('h2');
-        tagScore.setAttribute('class',"topscores");
+        var tagScore = $('<h2>');
+        tagScore.attr('class','topscores');
         var temp = localStorage.getItem
-        var scoreText = document.createTextNode((i+1)+". "+highScoreTrack[i].initials+": "+highScoreTrack[i].hScore);
-        tagScore.appendChild(scoreText);
-        highScores.appendChild(tagScore);
+        tagScore.text((i+1)+". "+highScoreTrack[i].initials+": "+highScoreTrack[i].hScore);
+        highScores.append(tagScore);
     }
 
-    var button = document.createElement('input');
-    button.setAttribute("type", "button");
-    button.setAttribute("value","Retake Quiz");
-    highScores.appendChild(button);
-    button.addEventListener("click",retakeQuiz);
+    var button = $('<input>');
+    button.attr('type', 'button');
+    button.attr('value','Retake Quiz');
+    highScores.append(button);
+    button.on("click", retakeQuiz);
 }
 
 function retakeQuiz(){
