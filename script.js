@@ -162,6 +162,7 @@ function quizTimer(){
 }
 
 function startQuiz(){
+    //! loads all page elements for the quiz screen...
     if (questionsAnswered===9){
         lastQuest();
     }
@@ -211,56 +212,52 @@ function startQuiz(){
 }
 
 function pageQuizContent(){
-    var question = document.getElementById("questionText");
-    var ansA = document.getElementById("choiceA");
-    var ansB = document.getElementById("choiceB");
-    var ansC = document.getElementById("choiceC");
-    var ansD = document.getElementById("choiceD");
+    //! loads questions and accompanying answers for each quiz question...
+    var question = $('#questionText');
+    var ansA = $("#choiceA");
+    var ansB = $("#choiceB");
+    var ansC = $("#choiceC");
+    var ansD = $("#choiceD");
     
-    //generates a random number to select a question     
-    
+    //!generates a random number to select a question     
     for(i=0; i<questionSelect.length-1; i++){
         var index=Math.floor(Math.random() * questionSelect.length);
     }
     
     correctAnswer=questionSelect[index].correctAnsInd;
 
-    //sets question and answer-button values
-    question.textContent = questionSelect[index].question;
-    ansA.setAttribute("value",questionSelect[index].answers[0]);
-    ansB.setAttribute("value",questionSelect[index].answers[1]);
-    ansC.setAttribute("value",questionSelect[index].answers[2]);
-    ansD.setAttribute("value",questionSelect[index].answers[3]);
-    
+    //! sets question and answer-button values
+    question.text(questionSelect[index].question);
+    ansA.attr('value',questionSelect[index].answers[0]);
+    ansB.attr('value',questionSelect[index].answers[1]);
+    ansC.attr('value',questionSelect[index].answers[2]);
+    ansD.attr('value',questionSelect[index].answers[3]);
 
-    ansA.addEventListener('click',function(){
+    ansA.on("click",function(){
         if (this.value === correctAnswer){
             deleteArray = questionSelect.splice([index],1);
             rightAnswer();
         }else{
             wrongAnswer();
         }
-        
     })
-    ansB.addEventListener('click',function(){
+    ansB.on("click",function(){
         if (this.value === correctAnswer){
             var deleteArray = questionSelect.splice([index],1);
             rightAnswer();
         }else{
             wrongAnswer();
         }
-        
     })
-    ansC.addEventListener('click',function(){
+    ansC.on("click",function(){
         if (this.value === correctAnswer){
             var deleteArray = questionSelect.splice([index],1);
             rightAnswer();
         }else{
             wrongAnswer();
         }
-       
     })
-    ansD.addEventListener('click',function(){
+    ansD.on("click",function(){
         if (this.value === correctAnswer){
             var deleteArray = questionSelect.splice([index],1);
             rightAnswer();
