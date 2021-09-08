@@ -163,8 +163,6 @@ function quizTimer(){
 
 function startQuiz(){
     //! loads all page elements for the quiz screen...
-    console.log("Answered: "+questionsAnswered);
-
     var questionPage = $('#contentarea');
         questionPage.empty();
 
@@ -216,7 +214,6 @@ function pageQuizContent(){
     var ansB = $("#choiceB");
     var ansC = $("#choiceC");
     var ansD = $("#choiceD");
-    
 
     if (questionsAnswered !== 9) {
         //!generates a random number to select a question     
@@ -297,52 +294,83 @@ function rightAnswer(){
 }
 
 function winScreen(){
-    var landingPage = document.getElementById("contentarea");
-    landingPage.innerHTML = "";
-    var landingh1Tag = document.createElement("h1");
-    var landingh1text = document.createTextNode("All done!");
-    landingh1Tag.appendChild(landingh1text);  
-    landingPage.appendChild(landingh1Tag);
+    // var landingPage = document.getElementById("contentarea");
+    var landingPage = $('#contentarea');
+    landingPage.empty();
+    
+    // var landingh1Tag = document.createElement("h1");
+    var landingh1Tag = $('<h1>');
+    // var landingh1text = document.createTextNode("All done!");
+    landingh1Tag.text("All done!");
+    // landingh1Tag.appendChild(landingh1text);  
+    // landingPage.appendChild(landingh1Tag);
+    landingPage.append(landingh1Tag);
 
-    var landingh2Tag = document.createElement("h2");
-    var landingh2text = document.createTextNode("Your score is: "+score);
-    landingh2Tag.appendChild(landingh2text);  
-    landingPage.appendChild(landingh2Tag);
+    // var landingh2Tag = document.createElement("h2");
+    var landingh2Tag = $('<h2>');
+    // var landingh2text = document.createTextNode("Your score is: "+score);
+    landingh2Tag.text("Your score is: " + score);
+    // landingh2Tag.appendChild(landingh2text);  
+    // landingPage.appendChild(landingh2Tag);
+    landingPage.append(landingh2Tag);
 
-    var landingh3Tag = document.createElement("h3");
+    // var landingh3Tag = document.createElement("h3");
+    var landingh3Tag = $('<h3>');
+
     if (score<5){
-        var landingh3text = document.createTextNode("Not too great. Try again.");
+        // var landingh3text = document.createTextNode("Not too great. Try again.");
+        landingh3Tag.text("Not too great. Try again.");
     }else if (score<8){
-        var landingh3text = document.createTextNode("Not bad.");
+        // var landingh3text = document.createTextNode("Not bad.");
+        landingh3Tag.text("Not bad.");
     }else{
-        var landingh3text = document.createTextNode("Nice!");
+        // var landingh3text = document.createTextNode("Nice!");
+        landingh3Tag.text("Nice!");
     }
-    landingh3Tag.appendChild(landingh3text);  
-    landingPage.appendChild(landingh3Tag);
+    // landingh3Tag.appendChild(landingh3text);  
+    // landingPage.appendChild(landingh3Tag);
+    landingPage.append(landingh3Tag);
 
-    var formContainerDiv = document.createElement('form');
-    formContainerDiv.setAttribute('id','initialFormContainer');
-    landingPage.appendChild(formContainerDiv);
+    // var formContainerDiv = document.createElement('form');
+    var formContainerDiv = $('<form>');
+    // formContainerDiv.setAttribute('id','initialFormContainer');
+    formContainerDiv.attr('id','initialFormContainer');
+    // landingPage.appendChild(formContainerDiv);
+    landingPage.append(formContainerDiv);
     
-    var inputTag = document.createElement("h3");
-    inputTag.setAttribute('id','inputTag');
-    var inputText = document.createTextNode("Enter your initials:");
-    inputTag.appendChild(inputText);  
-    formContainerDiv.appendChild(inputTag);
+    // var inputTag = document.createElement("h3");
+    var inputTag = $('<h3>');
+    // inputTag.setAttribute('id','inputTag');
+    inputTag.attr('id','inputTag');
+    // var inputText = document.createTextNode("Enter your initials:");
+    inputTag.text("Enter your initials:");
+    // inputTag.appendChild(inputText);  
+    // formContainerDiv.appendChild(inputTag);
+    formContainerDiv.append(inputTag);
 
-    var typeText = document.createElement('input');
-    typeText.setAttribute('type','text');
-    typeText.setAttribute('id','typeTextBox');
-    typeText.setAttribute('maxlength','3');
-    formContainerDiv.appendChild(typeText);
+    // var typeText = document.createElement('input');
+    var typeText = $('<input>');
+    typeText.attr('type','text');
+    typeText.attr('id','typeTextBox');
+    typeText.attr('maxlength','3');
+    // typeText.setAttribute('type','text');
+    // typeText.setAttribute('id','typeTextBox');
+    // typeText.setAttribute('maxlength','3');
+    // formContainerDiv.appendChild(typeText);
+    formContainerDiv.append(typeText);
     
-    var submitScore = document.createElement('input');
-    submitScore.setAttribute("type","submit");
-    submitScore.setAttribute("id","submitChoice");
-    submitScore.setAttribute("value","Submit");
-    formContainerDiv.appendChild(submitScore);
+    // var submitScore = document.createElement('input');
+    var submitScore = $('<input>');
+    submitScore.attr("type","submit");
+    submitScore.attr("id","submitChoice");
+    submitScore.attr("value","Submit");
+    // submitScore.setAttribute("type","submit");
+    // submitScore.setAttribute("id","submitChoice");
+    // submitScore.setAttribute("value","Submit");
+    // formContainerDiv.appendChild(submitScore);
+    formContainerDiv.append(submitScore);
     
-    submitScore.addEventListener('click',function(){
+    submitScore.on("click", function(){
         event.preventDefault();
 
         var highScoreTrack = localStorage.getItem("highScoreTrack");
